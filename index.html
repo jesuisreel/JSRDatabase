@@ -1,60 +1,41 @@
-<!-- Подключаем библиотеку Papa Parse для удобного разбора CSV -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-
-<!-- Место, где появится таблица -->
+<!-- Контейнер для таблицы -->
 <div id="table-container">Загрузка данных...</div>
 
 <script>
-    // Функция для загрузки и отображения CSV
-    fetch('JSR database - Обложка.csv') // Укажите путь к вашему файлу, если он в папке data, то 'data/data.csv'
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Файл не найден');
-            }
-            return response.text();
-        })
-        .then(csvData => {
-            // Парсим CSV с помощью PapaParse
-            Papa.parse(csvData, {
-                header: true, // Первая строка - это заголовки
-                skipEmptyLines: true,
-                complete: function(results) {
-                    buildTable(results.data); // Строим таблицу из полученных данных
-                }
-            });
+    const API_URL = 'https://script.google.com/macros/s/ВАШ_SCRIPT_ID/exec'; // замените на ваш URL
+    
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            buildTable(data);
         })
         .catch(error => {
             document.getElementById('table-container').innerHTML = 'Ошибка загрузки данных.';
-            console.error('Ошибка:', error);
         });
 
-    // Функция, которая строит HTML-таблицу
     function buildTable(data) {
         if (!data || data.length === 0) {
-            document.getElementById('table-container').innerHTML = 'Нет данных для отображения.';
+            document.getElementById('table-container').innerHTML = 'Нет данных.';
             return;
         }
 
         let html = '<table><thead><tr>';
-        const headers = Object.keys(data[0]); // Получаем заголовки из первой строки данных
+        const headers = Object.keys(data[0]);
         
-        // Формируем заголовки таблицы
         headers.forEach(header => {
             html += `<th>${header}</th>`;
         });
         html += '</tr></thead><tbody>';
 
-        // Формируем строки с данными
         data.forEach(row => {
             html += '<tr>';
             headers.forEach(header => {
-                html += `<td>${row[header] || ''}</td>`; // Если ячейка пустая, ставим пустоту
+                html += `<td>${row[header] || ''}</td>`;
             });
             html += '</tr>';
         });
         html += '</tbody></table>';
         
-        // Вставляем готовую таблицу на страницу
         document.getElementById('table-container').innerHTML = html;
     }
 </script>
