@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя таблица</title>
+    <style>
+        /* Немного стилей, чтобы страница выглядела аккуратно */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            text-align: center; /* Выровняем заголовок по центру */
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        iframe {
+            width: 100%;      /* Растягиваем iframe на всю ширину контейнера */
+            height: 600px;     /* Задаем высоту. Можете изменить на свое усмотрение */
+            border: 1px solid #ccc; /* Легкая серая рамка */
+            border-radius: 4px; /* Немного скругленные углы */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Данные из Google Sheets</h1>
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?widget=true&amp;headers=false"></iframe>
+    </div>
+</body>
+</html>
