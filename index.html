@@ -3,116 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>JSR Database</title>
 <link rel="shortcut icon" href="/favicon.ico">
-
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+ font-family:Arial, Helvetica, sans-serif;
 }
-
 body{
-background:#0f172a;
-color:white;
-height:100vh;
-display:flex;
-flex-direction:column;
+ background:#0f172a;
+ color:white;
+ height:100vh;
+ display:flex;
+ flex-direction:column;
 }
-
 /* NAVBAR */
-
 .navbar{
-height:60px;
-background:#020617;
-display:flex;
-align-items:center;
-padding:0 15px;
-gap:15px;
-border-bottom:1px solid rgba(255,255,255,0.08);
+ height:60px;
+ background:#020617;
+ display:flex;
+ align-items:center;
+ padding:0 15px;
+ gap:15px;
+ border-bottom:1px solid rgba(255,255,255,0.08);
 }
-
 .logo{
-font-weight:700;
-font-size:18px;
-margin-right:10px;
+ font-weight:700;
+ font-size:18px;
+ margin-right:10px;
 }
-
 /* tabs */
-
 .tabs{
-display:flex;
-gap:8px;
-overflow-x:auto;
+ display:flex;
+ gap:8px;
+ overflow-x:auto;
 }
-
 .tab{
-background:#1e293b;
-border:none;
-color:white;
-padding:8px 14px;
-border-radius:6px;
-cursor:pointer;
-font-size:14px;
-transition:0.2s;
-white-space:nowrap;
+ background:#1e293b;
+ border:none;
+ color:white;
+ padding:8px 14px;
+ border-radius:6px;
+ cursor:pointer;
+ font-size:14px;
+ transition:0.2s;
+ white-space:nowrap;
 }
-
 .tab:hover{
-background:#334155;
+ background:#334155;
 }
-
 .tab.active{
-background:#3b82f6;
+ background:#3b82f6;
 }
-
 /* iframe wrapper */
-
 .table{
-flex:1;
-overflow:hidden;
+ flex:1;
+ overflow:auto; /* Добавляем прокрутку */
+ position: relative;
 }
-
-/* SCALE TABLE */
-
-.sheet-wrapper{
-width:111%;
-height:111%;
-transform:scale(0.9);
-transform-origin:top left;
-}
-
-/* iframe */
-
+/* Убираем transform scale и добавляем normal iframe */
 iframe{
-width:100%;
-height:calc(100% + 60px);
-border:0;
-margin-bottom:-60px;
+ width:100%;
+ height:100%;
+ border:0;
+ display:block;
+}
+/* Скрываем верхнюю строку с названием листа через iframe sandbox + дополнительный контейнер */
+.sheet-container {
+ width:100%;
+ height:100%;
+ overflow:auto;
+}
+/* Дополнительный слой для скрытия заголовка через смещение */
+.iframe-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
+.iframe-wrapper iframe {
+  width: 100%;
+  height: calc(100% + 68px); /* увеличиваем высоту */
+  margin-top: -30px; /* сдвигаем вверх, чтобы скрыть подпись */
+}
 footer{
-text-align:center;
-padding:10px;
-font-size:13px;
-opacity:0.6;
+ text-align:center;
+ padding:10px;
+ font-size:13px;
+ opacity:0.6;
 }
-
 </style>
 </head>
-
 <body>
-
 <div class="navbar">
-
 <div class="logo">JSR Database</div>
-
 <div class="tabs">
-
 <button class="tab active" onclick="loadSheet('1022140079',this)">Обложка</button>
 <button class="tab" onclick="loadSheet('2055962560',this)">Патчноут</button>
 <button class="tab" onclick="loadSheet('355733407',this)">Флотостроение</button>
@@ -128,40 +116,32 @@ opacity:0.6;
 <button class="tab" onclick="loadSheet('1113798068',this)">Гостганы</button>
 <button class="tab" onclick="loadSheet('123306869',this)">Мяуфицеры</button>
 <button class="tab" onclick="loadSheet('1061765372',this)">Тесты</button>
-
 </div>
-
 </div>
-
 <div class="table">
-
-<div class="sheet-wrapper">
-
-<iframe id="sheet"
-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid=1022140079&single=true&widget=false&headers=false"></iframe>
-
+<div class="iframe-wrapper">
+<iframe id="sheet" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid=1022140079&single=true&widget=false&headers=false"></iframe>
 </div>
-
 </div>
-
-<footer>
-JSR Database • 2026
-</footer>
-
+<footer> JSR Database • 2026 </footer>
 <script>
-
 function loadSheet(gid,btn){
-
-document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
-btn.classList.add("active")
-
-document.getElementById("sheet").src =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid="+gid+"&single=true&widget=false&headers=false"
-
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
+ btn.classList.add("active")
+ document.getElementById("sheet").src = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid="+gid+"&single=true&widget=false&headers=false"
 }
-
 </script>
-
 </body>
 </html>
+
+<script>
+function loadSheet(gid, btn){
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("sheet").src = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid="+gid+"&single=true&widget=false&headers=false";
+}
+</script>
+</body>
+</html>
+
 
