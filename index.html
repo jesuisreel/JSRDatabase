@@ -106,18 +106,22 @@ width:200px;
 
 /* iframe wrapper */
 
-.table{
-flex:1;
-overflow:auto;
-background:#0f172a;
+.table {
+  flex: 1;
+  overflow-x: auto;       /* горизонтальная прокрутка */
+  overflow-y: hidden;     /* убираем лишнюю вертикальную полосу */
+  background: #0f172a;
+  position: relative;
 }
 
 /* SCALE TABLE */
 
-.sheet-wrapper{
-width:100%;
-height:100%;
-overflow:auto;
+.sheet-wrapper {
+  width: max-content;     /* чтобы iframe не сжимался */
+  height: 100%;
+  transform: scale(0.9);  /* масштаб 90% */
+  transform-origin: top left;
+  margin-bottom: -60px;   /* скрываем нижнюю панель Google Sheets */
 }
 
 /* iframe */
@@ -199,6 +203,7 @@ document.getElementById("sheet").src =
 
 </body>
 </html>
+
 
 
 
