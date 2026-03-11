@@ -5,6 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>JSR Database</title>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* Header */
+
+header{
+background:#020617;
+padding:20px 40px;
+box-shadow:0 2px 10px rgba(0,0,0,0.4);
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+.nav{
+font-size:14px;
+opacity:0.7;
+}<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JSR Database</title>
 <link rel="shortcut icon" href="/favicon.ico">
 
 <style>
@@ -36,24 +81,6 @@ gap:15px;
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-::-webkit-scrollbar{
-height:10px;
-width:10px;
-}
-
-::-webkit-scrollbar-track{
-background:#020617;
-}
-
-::-webkit-scrollbar-thumb{
-background:#334155;
-border-radius:10px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-background:#475569;
-}
-  
 .logo{
 font-weight:700;
 font-size:18px;
@@ -65,7 +92,6 @@ margin-right:10px;
 .tabs{
 display:flex;
 gap:8px;
-overflow-x:auto;
 }
 
 .tab{
@@ -77,7 +103,6 @@ border-radius:6px;
 cursor:pointer;
 font-size:14px;
 transition:0.2s;
-white-space:nowrap;
 }
 
 .tab:hover{
@@ -104,39 +129,16 @@ color:white;
 width:200px;
 }
 
-/* iframe wrapper */
-
-.table {
-  flex: 1;
-  overflow-x: auto;   /* горизонтальная прокрутка */
-  overflow-y: hidden; /* убираем вертикальную полосу */
-  background:#0f172a;
-}
-
-/* SCALE TABLE */
-
-.sheet-wrapper {
-  width: max-content;  /* таблица по ширине контента */
-  height: 100%;
-  position: relative;
-  overflow: hidden;   /* скрываем нижнюю панель Google */
-}
-
 /* iframe */
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-  zoom: 0.9;           /* масштаб 90%, безопаснее чем transform */
+.table{
+flex:1;
 }
 
-footer{
-text-align:center;
-padding:10px;
-font-size:13px;
-opacity:0.6;
+iframe{
+width:100%;
+height:100%;
+border:0;
 }
 
 </style>
@@ -150,40 +152,65 @@ opacity:0.6;
 
 <div class="tabs">
 
-<button class="tab active" onclick="loadSheet('1022140079',this)">Обложка</button>
-<button class="tab" onclick="loadSheet('2055962560',this)">Патчноут</button>
-<button class="tab" onclick="loadSheet('355733407',this)">Флотостроение</button>
-<button class="tab" onclick="loadSheet('968313761',this)">Классы</button>
-<button class="tab" onclick="loadSheet('341731409',this)">Сленг</button>
-<button class="tab" onclick="loadSheet('1237095338',this)">Словарь</button>
-<button class="tab" onclick="loadSheet('1234602772',this)">Эквип</button>
-<button class="tab" onclick="loadSheet('1596449104',this)">ОС</button>
-<button class="tab" onclick="loadSheet('1807838578',this)">Прототипы</button>
-<button class="tab" onclick="loadSheet('1255814069',this)">Фарм</button>
-<button class="tab" onclick="loadSheet('1547632435',this)">Корабли</button>
-<button class="tab" onclick="loadSheet('704938259',this)">Барражи</button>
-<button class="tab" onclick="loadSheet('1113798068',this)">Гостганы</button>
-<button class="tab" onclick="loadSheet('123306869',this)">Мяуфицеры</button>
-<button class="tab" onclick="loadSheet('1061765372',this)">Тесты</button>
+<button class="tab active"
+onclick="loadSheet('1022140079',this)">Обложка</button>
 
+<button class="tab"
+onclick="loadSheet('2055962560',this)">Патчноут и датамайн</button>
+
+<button class="tab"
+onclick="loadSheet('355733407',this)">Флотостроение</button>
+
+<button class="tab"
+onclick="loadSheet('968313761',this)">Классы кораблей</button>
+
+<button class="tab"
+onclick="loadSheet('341731409',this)">Сленг</button>
+
+<button class="tab"
+onclick="loadSheet('1237095338',this)">Словарь</button>
+
+<button class="tab"
+onclick="loadSheet('1234602772',this)">Эквип</button>
+
+<button class="tab"
+onclick="loadSheet('1596449104',this)">ОС</button>
+
+<button class="tab"
+onclick="loadSheet('1807838578',this)">Прототипы</button>
+
+<button class="tab"
+onclick="loadSheet('1255814069',this)">Что скупать и фармить</button>
+
+<button class="tab"
+onclick="loadSheet('1547632435',this)">Хороший ли корабль?</button>
+
+<button class="tab"
+onclick="loadSheet('704938259',this)">Барражи</button>
+
+<button class="tab"
+onclick="loadSheet('1113798068',this)">Гостганы и саммоны</button>
+
+<button class="tab"
+onclick="loadSheet('123306869',this)">Мяуфицеры</button>
+
+<button class="tab"
+onclick="loadSheet('1061765372',this)">Архив тестов</button>
+
+</div>
+
+<div class="search">
+<input type="text" placeholder="Поиск..." onkeydown="searchTable(event)">
 </div>
 
 </div>
 
 <div class="table">
 
-<div class="sheet-wrapper">
-
 <iframe id="sheet"
-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid=1022140079&single=true&widget=false&headers=false"></iframe>
+src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid=0&single=true"></iframe>
 
 </div>
-
-</div>
-
-<footer>
-JSR Database • 2026
-</footer>
 
 <script>
 
@@ -193,7 +220,15 @@ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
 btn.classList.add("active")
 
 document.getElementById("sheet").src =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid="+gid+"&single=true&widget=false&headers=false"
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSDE2N2O2tiuGaluqmmzTepeR9Omt9y_qFxt4GoavmoE7evOom6AOhLBTDnCykUIjwHldU63tkfaTpd/pubhtml?gid="+gid+"&single=true"
+
+}
+
+function searchTable(e){
+
+if(e.key==="Enter"){
+alert("Поиск работает внутри Google Sheets. Нажмите Ctrl+F внутри таблицы.")
+}
 
 }
 
@@ -202,18 +237,9 @@ document.getElementById("sheet").src =
 </body>
 </html>
 
+<footer>
+JSR Database • 2026
+</footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
+</html>
