@@ -852,7 +852,7 @@ function renderHybrid(s,v,o){
       if(x.band){if(o.f!=='equip'&&!(o.f==='goodship'&&['r73','r82'].includes(x.band.key)))out('<div class="bandw" data-r="'+(x.a+1)+'">'+slotH(o.f,x.band.key,{band:1})+'</div>');continue}
       if(o.f==='equip'&&G.has(k+1))continue;
       tab('<tr class="sp"><td colspan="'+W+'" style="height:'+Math.min(x.L,3)*7+'px"></td></tr>');continue}
-    if(o.f==='equip'&&(eqChip(rows,x)||(x.a===x.b&&x.cols.some(c=>TT(rows,x.a,c)==='Зенитки (с "баффами")')))){
+    if(o.f==='equip'&&eqChip(rows,x)){
       const ts=[];for(let q=x.a;q<=x.b;q++)x.cols.forEach(c=>{const t=TT(rows,q,c);if(t&&c<14)ts.push(t.replace(/\s+/g,' '))});
       out('<div class="shsec" data-r="'+(x.a+1)+'"><h3>'+esc(ts.join(' · '))+'</h3></div>');continue}
     if(o.f==='shop'&&x.kind==='sec'){
@@ -911,9 +911,9 @@ function renderGridOld(s,v,o){
           else if(it.kind==='par')cls='par'+(o.hdr>50&&sg.c===0&&(q===0||(txt.length<=60&&!/\n/.test(txt)&&it.a===it.b))?' big':'');
           else{cls='f';if(isNum(txt))cls+=' num';else if(it.kind==='cards'&&q===it.a&&ne.length>1&&it.b>it.a)cls+=' nm';
             if(it.kind==='tbl')cls+=' tbl';if(hdRow)cls+=' th'}
-         let inner; //Я РОТ ЕБАЛ БЛЯТЬ ЭТИ КАРТИНКИ ХИНКИ
+         let inner; 
          if(o.nav==='equip'&&sg.c>=14&&NAVEQ[navNorm(txt)])inner='<a class="nl" data-go="'+NAVEQ[navNorm(txt)]+'">'+esc(txt.replace(/-\n/g,'').replace(/\n/g,' '))+'</a>';
-         else inner=cell(txt); //КОНЕЦ ХУЕТА 2
+         else inner=cell(txt); 
           if(it.kind==='par')inner='<div class="pw">'+inner+'</div>';
           h+='<td class="'+cls+'"'+cs+'>'+inner+'</td>'});
         h+='</tr>'}
