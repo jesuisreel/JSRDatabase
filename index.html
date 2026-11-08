@@ -852,7 +852,7 @@ function renderHybrid(s,v,o){
       if(x.band){if(o.f!=='equip'&&!(o.f==='goodship'&&['r73','r82'].includes(x.band.key)))out('<div class="bandw" data-r="'+(x.a+1)+'">'+slotH(o.f,x.band.key,{band:1})+'</div>');continue}
       if(o.f==='equip'&&G.has(k+1))continue;
       tab('<tr class="sp"><td colspan="'+W+'" style="height:'+Math.min(x.L,3)*7+'px"></td></tr>');continue}
-    if(o.f==='equip'&&eqChip(rows,x)){
+    if(o.f==='equip'&&(eqChip(rows,x)||(x.a===x.b&&x.cols.some(c=>TT(rows,x.a,c)==='Зенитки (с "баффами")')))){
       const ts=[];for(let q=x.a;q<=x.b;q++)x.cols.forEach(c=>{const t=TT(rows,q,c);if(t&&c<14)ts.push(t.replace(/\s+/g,' '))});
       out('<div class="shsec" data-r="'+(x.a+1)+'"><h3>'+esc(ts.join(' · '))+'</h3></div>');continue}
     if(o.f==='shop'&&x.kind==='sec'){
