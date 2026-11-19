@@ -47,6 +47,22 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (request.method !== 'GET' || request.destination !== 'image' || url.origin !== self.location.origin) return;
 
+  // Патчноуты часто заменяют под тем же именем: проверяем сеть перед кэшем.
+  if (url.pathname.includes('/images/patch/')) {
+    event.respondWith((async () => {
+      try {
+        const response = await fetch(request, {cache: 'no-cache'});
+        await saveImage(request, response);
+        return response;
+      } catch (error) {
+        const cached = await caches.match(request, {cacheName: IMAGE_CACHE});
+        if (cached) return cached;
+        throw error;
+      }
+    })());
+    return;
+  }
+
   // waitUntil вызывается синхронно, чтобы фоновое обновление успело завершиться.
   let background;
   const backgroundDone = new Promise(resolve => { background = resolve; });
